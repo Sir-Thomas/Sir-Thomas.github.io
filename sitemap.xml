@@ -2,64 +2,64 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://sirthomas.xyz/</loc>
+    <loc>http://sir-thomas.github.io/</loc>
     <lastmod>2021-11-30T16:02:11-06:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/post/</loc>
+    <loc>http://sir-thomas.github.io/post/</loc>
     <lastmod>2021-11-30T16:02:11-06:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/starting-my-blog/</loc>
+    <loc>http://sir-thomas.github.io/starting-my-blog/</loc>
     <lastmod>2021-11-30T16:02:11-06:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/creating-a-new-theme/</loc>
+    <loc>http://sir-thomas.github.io/creating-a-new-theme/</loc>
     <lastmod>2021-11-30T03:14:50+00:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/page/about/</loc>
+    <loc>http://sir-thomas.github.io/page/about/</loc>
     <lastmod>2015-04-03T02:13:50+00:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/page/contact/</loc>
+    <loc>http://sir-thomas.github.io/page/contact/</loc>
     <lastmod>2015-04-03T02:13:50+00:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/page/</loc>
+    <loc>http://sir-thomas.github.io/page/</loc>
     <lastmod>2015-04-03T02:13:50+00:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/goisforlovers/</loc>
+    <loc>http://sir-thomas.github.io/goisforlovers/</loc>
     <lastmod>2014-04-02T02:13:50+00:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/tags/development/</loc>
+    <loc>http://sir-thomas.github.io/tags/development/</loc>
     <lastmod>2014-04-02T02:13:50+00:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/tags/go/</loc>
+    <loc>http://sir-thomas.github.io/tags/go/</loc>
     <lastmod>2014-04-02T02:13:50+00:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/tags/golang/</loc>
+    <loc>http://sir-thomas.github.io/tags/golang/</loc>
     <lastmod>2014-04-02T02:13:50+00:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/migrate-from-jekyll/</loc>
+    <loc>http://sir-thomas.github.io/migrate-from-jekyll/</loc>
     <lastmod>2014-04-02T02:13:50+00:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/tags/</loc>
+    <loc>http://sir-thomas.github.io/tags/</loc>
     <lastmod>2014-04-02T02:13:50+00:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/tags/templates/</loc>
+    <loc>http://sir-thomas.github.io/tags/templates/</loc>
     <lastmod>2014-04-02T02:13:50+00:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/tags/themes/</loc>
+    <loc>http://sir-thomas.github.io/tags/themes/</loc>
     <lastmod>2014-04-02T02:13:50+00:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/categories/</loc>
+    <loc>http://sir-thomas.github.io/categories/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/categories/development/</loc>
+    <loc>http://sir-thomas.github.io/categories/development/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/hugoisforlovers/</loc>
+    <loc>http://sir-thomas.github.io/hugoisforlovers/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/categories/golang/</loc>
+    <loc>http://sir-thomas.github.io/categories/golang/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://sirthomas.xyz/tags/hugo/</loc>
+    <loc>http://sir-thomas.github.io/tags/hugo/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url>
 </urlset>

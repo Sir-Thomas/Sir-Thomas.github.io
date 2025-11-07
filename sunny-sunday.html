@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunny Sunday Calendar</title>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg">
+            <a href="index.html" class="navbar-brand">SirThomas's Tools</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="bosses.html" class="nav-link">Boss HP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="sunny-sunday.html" class="nav-link active">Sunny Sunday</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="tracker.html" class="nav-link disabled">Gear Tracker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="hexa-tracker.html" class="nav-link disabled">Hexa Tracker</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="table-responsive text-nowrap" x-data="getSundays()">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Sunny Sunday Bonuses</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <template x-for="sunday in sundays">
+                        <template x-if="sunday.date > new Date().toISOString().split('T')[0]">
+                            <tr>
+                                <td x-text="sunday.date"></td>
+                                <td>
+                                    <ul>
+                                        <template x-for="bonus in sunday.bonuses">
+                                            <li>
+                                                <span x-text="text[bonus].mainText"></span>
+                                                <ul>
+                                                    <template x-if="text[bonus].subText">
+                                                        <li x-text="text[bonus].subText"></li>
+                                                    </template>
+                                                </ul>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </template>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function getSundays() {
+            return {
+                sundays: [
+                    { date: "2025-09-28", bonuses: ["thirty", "hexaStat"] },
+                    { date: "2025-10-05", bonuses: ["monsterPark", "portals", "infernoWolf"] },
+                    { date: "2025-10-12", bonuses: ["combo", "runeBuff", "runeCooldown", "monsterCollection", "monsterbloom"] },
+                    { date: "2025-10-19", bonuses: ["spellTrace", "innerAbility", "magSouls"] },
+                    { date: "2025-10-26", bonuses: ["thirty", "runeCooldown", "runeBuff", "combo", "portals", "infernoWolf", "monsterPark", "soulErda"] },
+                    { date: "2025-11-02", bonuses: ["fiveTenFifteen"] },
+                    { date: "2025-11-09", bonuses: ["monsterCollection", "monsterbloom", "eliteMonsters", "spellTrace"] },
+                ],
+                text: {
+                    combo: { mainText: "Combo Kill EXP +300%" },
+                    eliteMonsters: { mainText: "3 Elite Monsters spawn" },
+                    fiveTenFifteen: { mainText: "100% success on 5, 10, and 15-Star Force Enhancements.", subText: "Excludes Superior Equipment, 100% Success Rate for Star Force Levels 5, 10, 15." },
+                    hexaStat: { mainText: "[HEXA Matrix] When main stats are Lv. 5+, main stats' Enhancement change increased 20%" },
+                    infernoWolf: { mainText: "5x EXP Inferno Wolf Exit EXP", subText: "Enter up to 5 times in a day, Great Octopus Buffet - Bounty Hunter/Inferno Wolf EXP perk also applied" },
+                    innerAbility: { mainText: "50% off Ability resets" },
+                    magSouls: { mainText: "5x Chance for Magnificent Souls" },
+                    monsterCollection: { mainText: "2x chance for new Monster Collection monsters" },
+                    monsterbloom: { mainText: "Mysterious Monsterbloom (x3): Untradable, 7-day duration. Claim once per account." },
+                    monsterPark: { mainText: "+250% Monster Park Clear EXP", subText: "Excludes Monster Park Extreme" },
+                    portals: { mainText: "5x EXP for Pollo, Fritto, and Especia Bounty Hunting" },
+                    runeCooldown: { mainText: "Rune Appearance Cooldown and Cooldown Reduction (from 15 min to 10 min)" },
+                    runeBuff: { mainText: "+100% Rune EXP buff effect (3x normal EXP)" },
+                    soulErda: { mainText: "2x Sol Erda when hunting", subText: "Sol Erda obtained through any other methods will not be increased." },
+                    spellTrace: { mainText: "50% off Spell Trace enhancements" },
+                    thirty: { mainText: "30% off Star Force enhancements" }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

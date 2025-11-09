@@ -46,7 +46,7 @@
                 </thead>
                 <tbody class="table-group-divider">
                     <template x-for="sunday in sundays">
-                        <template x-if="sunday.date > new Date().toISOString().split('T')[0]">
+                        <template x-if="sunday.date >= new Date().toISOString().split('T')[0]">
                             <tr>
                                 <td x-text="sunday.date"></td>
                                 <td>

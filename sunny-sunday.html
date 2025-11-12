@@ -75,31 +75,32 @@
         function getSundays() {
             return {
                 sundays: [
-                    { date: "2025-09-28", bonuses: ["thirty", "hexaStat"] },
-                    { date: "2025-10-05", bonuses: ["monsterPark", "portals", "infernoWolf"] },
-                    { date: "2025-10-12", bonuses: ["combo", "runeBuff", "runeCooldown", "monsterCollection", "monsterbloom"] },
-                    { date: "2025-10-19", bonuses: ["spellTrace", "innerAbility", "magSouls"] },
-                    { date: "2025-10-26", bonuses: ["thirty", "runeCooldown", "runeBuff", "combo", "portals", "infernoWolf", "monsterPark", "soulErda"] },
-                    { date: "2025-11-02", bonuses: ["fiveTenFifteen"] },
-                    { date: "2025-11-09", bonuses: ["monsterCollection", "monsterbloom", "eliteMonsters", "spellTrace"] },
+                    { date: "2025-11-16", bonuses: ["monsterPark", "runeCooldown", "runeBuff", "treasureHunter", "solErda", "combo"] },
+                    { date: "2025-11-23", bonuses: ["hexaStat", "monsterPark", "innerAbility", "magSouls", "spellTrace", "monsterCollection", "monsterbloom", "eliteMonsters"] },
+                    { date: "2025-11-30", bonuses: ["thirty", "boom"] },
+                    { date: "2025-12-07", bonuses: ["monsterPark", "runeCooldown", "runeBuff", "combo", "solErda"] },
+                    { date: "2025-12-14", bonuses: ["treasureHunter", "monsterCollection", "combo", "runeCooldown", "thirty", "runeBuff"] },
+
                 ],
                 text: {
+                    boom: { mainText: "30% reduced chance of item destruction when enhancing items below 21-Stars" },
                     combo: { mainText: "Combo Kill EXP +300%" },
-                    eliteMonsters: { mainText: "3 Elite Monsters spawn" },
-                    fiveTenFifteen: { mainText: "100% success on 5, 10, and 15-Star Force Enhancements.", subText: "Excludes Superior Equipment, 100% Success Rate for Star Force Levels 5, 10, 15." },
+                    eliteMonsters: { mainText: "Elite monster appearance increase" }, // "3 Elite Monsters spawn" },
+                    // fiveTenFifteen: { mainText: "100% success on 5, 10, and 15-Star Force Enhancements.", subText: "Excludes Superior Equipment, 100% Success Rate for Star Force Levels 5, 10, 15." },
                     hexaStat: { mainText: "[HEXA Matrix] When main stats are Lv. 5+, main stats' Enhancement change increased 20%" },
-                    infernoWolf: { mainText: "5x EXP Inferno Wolf Exit EXP", subText: "Enter up to 5 times in a day, Great Octopus Buffet - Bounty Hunter/Inferno Wolf EXP perk also applied" },
+                    // infernoWolf: { mainText: "5x EXP Inferno Wolf Exit EXP", subText: "Enter up to 5 times in a day, Great Octopus Buffet - Bounty Hunter/Inferno Wolf EXP perk also applied" },
                     innerAbility: { mainText: "50% off Ability resets" },
                     magSouls: { mainText: "5x Chance for Magnificent Souls" },
-                    monsterCollection: { mainText: "2x chance for new Monster Collection monsters" },
-                    monsterbloom: { mainText: "Mysterious Monsterbloom (x3): Untradable, 7-day duration. Claim once per account." },
+                    monsterCollection: { mainText: "+100% New monster registration rate for Monster Collection" },// "2x chance for new Monster Collection monsters" },
+                    monsterbloom: { mainText: "Mysterious Monsterbloom (x3): Untradable, 7-day duration. Claim once per account.", subText: "Note: Cannot be claimed in Challenger World." },
                     monsterPark: { mainText: "+250% Monster Park Clear EXP", subText: "Excludes Monster Park Extreme" },
-                    portals: { mainText: "5x EXP for Pollo, Fritto, and Especia Bounty Hunting" },
+                    // portals: { mainText: "5x EXP for Pollo, Fritto, and Especia Bounty Hunting" },
                     runeCooldown: { mainText: "Rune Appearance Cooldown and Cooldown Reduction (from 15 min to 10 min)" },
                     runeBuff: { mainText: "+100% Rune EXP buff effect (3x normal EXP)" },
-                    soulErda: { mainText: "2x Sol Erda when hunting", subText: "Sol Erda obtained through any other methods will not be increased." },
+                    solErda: { mainText: "2x Sol Erda when hunting" }, // , subText: "Sol Erda obtained through any other methods will not be increased." },
                     spellTrace: { mainText: "50% off Spell Trace enhancements" },
-                    thirty: { mainText: "30% off Star Force enhancements" }
+                    thirty: { mainText: "30% off Star Force enhancements", subText: "Excludes Superior Equipment, mesos used to safeguard are not eligible for the 30% discount" },
+                    treasureHunter: { mainText: "Treasure Hunter EXP x3" },
                 }
             }
         }

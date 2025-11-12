@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SirThomas's Tools</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg">
+            <a href="index.html" class="navbar-brand">SirThomas's Tools</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="bosses.html" class="nav-link">Boss HP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="sunny-sunday.html" class="nav-link">Sunny Sunday</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="starforce.html" class="nav-link active">Star Force</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container"
+        x-data="{ item: $persist({ starCatching: true }), simulations: $persist(10000), results: {} }">
+        <div class="row row-cols-3 mb-3">
+            <div class="col mb-3">
+                <label for="item-level" class="form-label">Item Level</label>
+                <input type="number" id="item-level" class="form-control" x-model.number="item.level" min="0" max="300"
+                    placeholder="Enter Item Level">
+            </div>
+            <div class="col mb-3">
+                <label for="star-catching" class="form-label">Star Catching</label>
+                <div>
+                    <input type="checkbox" id="star-catching" class="form-check-input" x-model="item.starCatching">
+                </div>
+            </div>
+            <div class="col mb-3">
+                <label for="safeguard" class="form-label">Safeguard</label>
+                <div>
+                    <input type="checkbox" id="safeguard" class="form-check-input" x-model="item.safeguard">
+                </div>
+            </div>
+            <div class="col mb-3">
+                <label for="starting-stars" class="form-label">Starting Stars</label>
+                <input type="number" id="starting-stars" class="form-control" x-model.number="item.startingStars"
+                    min="0" max="29" placeholder="Enter Starting Stars">
+            </div>
+            <div class="col mb-3">
+                <label for="ending-stars" class="form-label">Ending Stars</label>
+                <input type="number" id="ending-stars" class="form-control" x-model.number="item.endingStars" min="1"
+                    max="30" placeholder="Enter Ending Stars">
+            </div>
+            <div class="col mb-3">
+                <label for="simulations" class="form-label">Simulations</label>
+                <input type="number" id="simulations" class="form-control" x-model.number="simulations" min="1"
+                    max="500000" placeholder="Enter Number of Simulations">
+            </div>
+            <div class="col mb-3">
+                <div class="row">
+                    <div class="col">
+                        <h2>Events:</h2>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <input type="checkbox" id="thirty" class="form-check-input me-2" x-model="item.thirty">
+                            <label for="thirty" class="form-label">30% Off</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="boomReduction" class="form-check-input me-2"
+                                x-model="item.boomReduction">
+                            <label for="boomReduction" class="form-label">30% Boom Reduction</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col mb-3">
+                <input type="button" value="Simulate" class="btn btn-primary"
+                    @click="simulateStarForce(item, simulations).then(r => results = r)">
+            </div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col mb-3">
+                <h2>Results:</h2>
+                <div class="row">
+                    <div class="col">
+                        <h3>Mesos:</h3>
+                        <p>Average: <span x-text="formatNumber(results.averageCost)"></span></p>
+                        <p>Median: <span x-text="formatNumber(results.medianCost)"></span></p>
+                        <p>Min: <span x-text="formatNumber(results.minCost)"></span></p>
+                        <p>Max: <span x-text="formatNumber(results.maxCost)"></span></p>
+                    </div>
+                    <div class="col">
+                        <h3>Booms:</h3>
+                        <p>Average: <span x-text="results.averageBooms"></span></p>
+                        <p>Median: <span x-text="results.medianBooms"></span></p>
+                        <p>Min: <span x-text="results.minBooms"></span></p>
+                        <p>Max: <span x-text="results.maxBooms"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function simulateStarForce(item, simulations) {
+            return new Promise((resolve) => {
+                const rates = getRates();
+                const boomTable = getBoomTable();
+
+                const numWorkers = navigator.hardwareConcurrency || 4;
+                const simsPerWorker = Math.floor(simulations / numWorkers);
+                const results = [];
+                let completedWorkers = 0;
+
+                for (let i = 0; i < numWorkers; i++) {
+                    const worker = new Worker('simulator.js');
+                    const workerSims = i === numWorkers - 1
+                        ? simsPerWorker + (simulations % numWorkers)  // Last worker gets remainder
+                        : simsPerWorker;
+
+                    worker.onmessage = function (event) {
+                        results.push(...event.data);
+                        completedWorkers++;
+                        worker.terminate();  // Clean up worker
+
+                        if (completedWorkers === numWorkers) {
+                            const averageCost = getAverageCost(results);
+                            const averageBooms = getAverageBooms(results);
+                            const maxCost = getMaxCost(results);
+                            const minCost = getMinCost(results);
+                            const maxBooms = getMaxBooms(results);
+                            const minBooms = getMinBooms(results);
+                            const medianCost = getMedianCost(results);
+                            const medianBooms = getMedianBooms(results);
+                            resolve({ averageCost, averageBooms, maxCost, minCost, maxBooms, minBooms, medianCost, medianBooms });
+                        }
+                    };
+                    worker.postMessage({
+                        level: item.level,
+                        startingStars: item.startingStars,
+                        endingStars: item.endingStars,
+                        rates,
+                        boomTable,
+                        starCatching: item.starCatching,
+                        safeguard: item.safeguard,
+                        thirty: item.thirty,
+                        boomReduction: item.boomReduction,
+                        simulations: workerSims
+                    });
+                }
+            });
+        }
+
+        function getAverageCost(results) {
+            const totalCost = results.reduce((sum, result) => sum + result.totalCost, 0);
+            return totalCost / results.length;
+        }
+
+        function getMedianCost(results) {
+            const sortedCosts = results.map(result => result.totalCost).sort((a, b) => a - b);
+            const mid = Math.floor(sortedCosts.length / 2);
+            return sortedCosts.length % 2 !== 0
+                ? sortedCosts[mid]
+                : (sortedCosts[mid - 1] + sortedCosts[mid]) / 2;
+        }
+
+        function getMinCost(results) {
+            return Math.min(...results.map(result => result.totalCost));
+        }
+
+        function getMaxCost(results) {
+            return Math.max(...results.map(result => result.totalCost));
+        }
+
+        function getAverageBooms(results) {
+            const totalBooms = results.reduce((sum, result) => sum + result.booms, 0);
+            return totalBooms / results.length;
+        }
+
+        function getMedianBooms(results) {
+            const sortedBooms = results.map(result => result.booms).sort((a, b) => a - b);
+            const mid = Math.floor(sortedBooms.length / 2);
+            return sortedBooms.length % 2 !== 0
+                ? sortedBooms[mid]
+                : (sortedBooms[mid - 1] + sortedBooms[mid]) / 2;
+        }
+
+        function getMinBooms(results) {
+            return Math.min(...results.map(result => result.booms));
+        }
+
+        function getMaxBooms(results) {
+            return Math.max(...results.map(result => result.booms));
+        }
+
+        function getBoomTable() {
+            return {
+                15: 12,
+                16: 12,
+                17: 12,
+                18: 12,
+                19: 12,
+                20: 15,
+                21: 17,
+                22: 17,
+                23: 19,
+                24: 19,
+                25: 19,
+                26: 20,
+                27: 20,
+                28: 20,
+                29: 20
+            }
+        }
+
+        function getRates() {
+            return {
+                0: { success: .95, destroy: 0 },
+                1: { success: .90, destroy: 0 },
+                2: { success: .85, destroy: 0 },
+                3: { success: .85, destroy: 0 },
+                4: { success: .80, destroy: 0 },
+                5: { success: .75, destroy: 0 },
+                6: { success: .70, destroy: 0 },
+                7: { success: .65, destroy: 0 },
+                8: { success: .60, destroy: 0 },
+                9: { success: .55, destroy: 0 },
+                10: { success: .50, destroy: 0 },
+                11: { success: .45, destroy: 0 },
+                12: { success: .40, destroy: 0 },
+                13: { success: .35, destroy: 0 },
+                14: { success: .30, destroy: 0 },
+                15: { success: .30, destroy: .04 },
+                16: { success: .30, destroy: .04 },
+                17: { success: .15, destroy: .08 },
+                18: { success: .15, destroy: .08 },
+                19: { success: .15, destroy: .1 },
+                20: { success: .30, destroy: .15 },
+                21: { success: .15, destroy: .15 },
+                22: { success: .15, destroy: .2 },
+                23: { success: .10, destroy: .2 },
+                24: { success: .10, destroy: .2 },
+                25: { success: .10, destroy: .2 },
+                26: { success: .07, destroy: .2 },
+                27: { success: .05, destroy: .2 },
+                28: { success: .03, destroy: .2 },
+                29: { success: .01, destroy: .2 },
+            };
+        }
+
+        function formatNumber(num) {
+            if (!num) return '';
+            if (num >= 1e15) {
+                return (num / 1e15).toFixed(1) + ' Q';
+            } else if (num >= 1e12) {
+                return (num / 1e12).toFixed(1) + ' T';
+            } else if (num >= 1e9) {
+                return (num / 1e9).toFixed(1) + ' B';
+            } else if (num >= 1e6) {
+                return (num / 1e6).toFixed(1) + ' M';
+            } else if (num >= 1e3) {
+                return (num / 1e3).toFixed(1) + ' K';
+            } else {
+                return num.toString();
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

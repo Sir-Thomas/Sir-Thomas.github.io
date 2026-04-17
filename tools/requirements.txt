@@ -1,3 +1,6 @@
+python-dateutil
+requests
 requests_html
 lxml_html_clean
 firebase_admin
+bs4
